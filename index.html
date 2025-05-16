@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Censo da Saúde - Rio das Ostras</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+  <link rel="manifest" href="manifest.json" />
+<script>
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log("SW registrado"))
+    .catch(e => console.log("Erro SW:", e));
+}
+
+  
+</script>
+
+
+</head>
+<body>
+  <h1 class="titulo-principal laranja">Formulário Censo da Saúde - Rio das Ostras</h1>
+  <form id="censoForm" novalidate>
+    <h2>1. Identificação do Entrevistado</h2>
+    <label>Nome completo *</label>
+    <input type="text" name="nomeCompleto" required>
+
+    <label>Nome social</label>
+    <input type="text" name="nomeSocial">
+
+    <label>CPF *</label>
+    <input type="text" name="cpf" required>
+
+    <label>CNS</label>
+    <input type="text" name="cns">
+
+    <label>Data de nascimento *</label>
+    <input type="text" name="dataNascimento" required>
+
+    <label>Sexo *</label>
+    <select name="sexo" required>
+      <option value="">Selecione</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Feminino">Feminino</option>
+      <option value="Outro">Outro</option>
+    </select>
+
+    <label>Estado civil</label>
+    <select name="estadoCivil">
+      <option value="">Selecione</option>
+      <option value="Solteiro(a)">Solteiro(a)</option>
+      <option value="Casado(a)">Casado(a)</option>
+      <option value="Divorciado(a)">Divorciado(a)</option>
+      <option value="Viúvo(a)">Viúvo(a)</option>
+      <option value="União Estável">União Estável</option>
+    </select>
+
+    <label>Escolaridade</label>
+    <select name="escolaridade">
+      <option value="">Selecione</option>
+      <option value="Não alfabetizado">Não alfabetizado</option>
+      <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+      <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+      <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+      <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+      <option value="Superior Incompleto">Superior Incompleto</option>
+      <option value="Superior Completo">Superior Completo</option>
+      <option value="Pós-graduação">Pós-graduação</option>
+    </select>
+
+    <label>Ocupação</label>
+    <input type="text" name="ocupacao">
+
+    <label>Telefone</label>
+    <input type="tel" name="telefone">
+
+    <label>E-mail</label>
+    <input type="email" name="email">
+
+    <label>Possui alguma deficiência?</label>
+<select name="deficienciaPresente" onchange="document.getElementById('deficienciaGrupo').style.display = this.value === 'Sim' ? 'block' : 'none';">
+  <option value="">Selecione</option>
+  <option value="Sim">Sim</option>
+  <option value="Não">Não</option>
+</select>
+<div id="deficienciaGrupo" style="display:none">
+  <label>Quais?</label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="deficiencia[]" value="Auditiva"> Auditiva</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Física"> Física</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Intelectual"> Intelectual</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Visual"> Visual</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Mental"> Mental</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Múltipla"> Múltipla</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="TEA"> TEA</label><br>
+        <label><input type="checkbox" name="deficiencia[]" value="Outra"> Outra</label>
+  </div>
+</div>
+
+    <label>Possui doenças crônicas?</label>
+    <select name="doencaCronica" onchange="document.getElementById('doencasDetalhes').style.display = this.value === 'Sim' ? 'block' : 'none';">
+      <option value="">Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+    <div id="doencasDetalhes" style="display:none">
+      <label>Quais?</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="doencas[]" value="Hipertensão"> Hipertensão</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Diabetes"> Diabetes</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Asma"> Asma</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Doença renal crônica"> Doença renal crônica</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Doença cardiovascular"> Doença cardiovascular</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Doença hepática crônica"> Doença hepática crônica</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Doença respiratória crônica"> Doença respiratória crônica</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Câncer"> Câncer</label><br>
+        <label><input type="checkbox" name="doencas[]" value="Outras"> Outras</label>
+      </div>
+    </div>
+
+    <label>Usa medicamento contínuo?</label>
+    <select name="usoMedicamento" onchange="document.getElementById('medicamentosDetalhes').style.display = this.value === 'Sim' ? 'block' : 'none';">
+      <option value="">Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+    <div id="medicamentosDetalhes" style="display:none">
+      <label>Quais?</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="medicamentos[]" value="Losartana"> Losartana</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Metformina"> Metformina</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Insulina"> Insulina</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Sinvastatina"> Sinvastatina</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Levotiroxina"> Levotiroxina</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Omeprazol"> Omeprazol</label><br>
+        <label><input type="checkbox" name="medicamentos[]" value="Outro"> Outro</label>
+      </div>
+    </div>
+
+    <label>Possui plano de saúde privado?</label>
+    <select name="planoSaude">
+      <option value="">Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+
+    <label>Está gestante?</label>
+    <select name="gestante" onchange="document.getElementById('detalhesGestante').style.display = this.value === 'Sim' ? 'block' : 'none';">
+      <option value="">Selecione</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+    <div id="detalhesGestante" style="display:none">
+      <label>Tempo de gestação (semanas)</label>
+      <input type="number" name="tempoGestacao" min="1">
+
+      <label>Já possui filhos?</label>
+      <select name="possuiFilhos">
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>Quantos filhos?</label>
+      <input type="number" name="quantosFilhos" min="0">
+    </div>
+
+    <h2>2. Habitação</h2>
+<label>CEP</label>
+<input type="text" name="cep">
+
+<label>Tipo de logradouro</label>
+<select name="logradouroTipo">
+  <option value="">Selecione</option>
+  <option value="Rua">Rua</option>
+  <option value="Avenida">Avenida</option>
+  <option value="Travessa">Travessa</option>
+  <option value="Alameda">Alameda</option>
+  <option value="Praça">Praça</option>
+  <option value="Rodovia">Rodovia</option>
+  <option value="Estrada">Estrada</option>
+  <option value="Outros">Outros</option>
+</select>
+
+<label>Endereço</label>
+<input type="text" name="endereco">
+
+<label>Número</label>
+<input type="text" name="numero">
+
+<label>Complemento</label>
+<input type="text" name="complemento">
+
+<label>Bairro</label>
+<input type="text" name="bairro">
+
+<label>Tempo na residência (anos e meses)</label>
+<input type="text" name="tempoResidencia">
+
+<label>Tipo de residência</label>
+<select name="tipoResidencia">
+  <option value="">Selecione</option>
+  <option value="Casa">Casa</option>
+  <option value="Apartamento">Apartamento</option>
+  <option value="Kitnet">Kitnet</option>
+  <option value="Outros">Outros</option>
+</select>
+
+<label>Condição da moradia</label>
+<select name="condicaoMoradia">
+  <option value="">Selecione</option>
+  <option value="Própria">Própria</option>
+  <option value="Alugada">Alugada</option>
+  <option value="Cedida">Cedida</option>
+  <option value="Ocupação">Ocupação</option>
+</select>
+
+<label>Área</label>
+<select name="area">
+  <option value="">Selecione</option>
+  <option value="Urbana">Urbana</option>
+  <option value="Rural">Rural</option>
+  <option value="Expansão">Expansão</option>
+</select>
+
+<label>Tipo de imóvel</label>
+<select name="tipoImovel">
+  <option value="">Selecione</option>
+  <option value="Moradia">Moradia</option>
+  <option value="Veraneio">Veraneio</option>
+  <option value="Comercial">Comercial</option>
+  <option value="Outros">Outros</option>
+</select>
+
+<label>Número de moradores na residência *</label>
+<input type="number" name="numeroMoradores" min="1" required>
+
+<label>Possui água encanada?</label>
+<select name="aguaEncanada">
+  <option value="">Selecione</option>
+  <option value="Sim">Sim</option>
+  <option value="Não">Não</option>
+</select>
+
+<label>Possui esgoto?</label>
+<select name="esgoto">
+  <option value="">Selecione</option>
+  <option value="Rede Pública">Rede Pública</option>
+  <option value="Fossa Séptica">Fossa Séptica</option>
+  <option value="Fossa Negra">Fossa Negra</option>
+  <option value="Não Possui">Não Possui</option>
+</select>
+
+<label>Possui banheiro?</label>
+<input type="number" name="quantidadeBanheiros" min="0">
+
+<label>Recebe visita do agente comunitário de saúde?</label>
+<select name="visitaAgente">
+  <option value="">Selecione</option>
+  <option value="Nunca">Nunca</option>
+  <option value="Raramente">Raramente</option>
+  <option value="Mensalmente">Mensalmente</option>
+  <option value="Quinzenalmente">Quinzenalmente</option>
+  <option value="Semanalmente">Semanalmente</option>
+</select>
+
+<h2>3. Unidade de Saúde de Referência</h2>
+<label>Unidade de Saúde de Referência</label>
+<select name="unidadeSaude">
+  <option value="">Selecione</option>
+  <option value="AMBULATORIO DE SAUDE MENTAL RIO DAS OSTRAS">AMBULATORIO DE SAUDE MENTAL RIO DAS OSTRAS</option>
+  <option value="CAPS CENTRO DE ATENCAO PSICOSSOCIAL RIO DAS OSTRAS">CAPS CENTRO DE ATENCAO PSICOSSOCIAL RIO DAS OSTRAS</option>
+  <option value="CAPS I RUI RIBEIRO DE FREITAS">CAPS I RUI RIBEIRO DE FREITAS</option>
+  <option value="CENTRAL DE ARMAZENAGEM E DISTRIBUICAO DE IMUNOBIOLOGICOS RO">CENTRAL DE ARMAZENAGEM E DISTRIBUICAO DE IMUNOBIOLOGICOS RO</option>
+  <option value="CENTRAL DE REGULACAO TFD RIO DAS OSTRAS">CENTRAL DE REGULACAO TFD RIO DAS OSTRAS</option>
+  <option value="CENTRO DE OFTALMOLOGIA NILTON GONCALVES MARINS">CENTRO DE OFTALMOLOGIA NILTON GONCALVES MARINS</option>
+  <option value="CENTRO DE REABILITACAO ROCHA LEAO RIO DAS OSTRAS">CENTRO DE REABILITACAO ROCHA LEAO RIO DAS OSTRAS</option>
+  <option value="CENTRO DE SAUDE RIO DAS OSTRAS">CENTRO DE SAUDE RIO DAS OSTRAS</option>
+  <option value="CEO RIO DAS OSTRAS">CEO RIO DAS OSTRAS</option>
+  <option value="CLINICA DA FAMILIA PAULO HENRIQUE GUSSEM">CLINICA DA FAMILIA PAULO HENRIQUE GUSSEM</option>
+  <option value="COORDENADORIA DE VIGILANCIA EM SAUDE">COORDENADORIA DE VIGILANCIA EM SAUDE</option>
+  <option value="DEPARTAMENTO DE PROGRAMAS DE SAUDE">DEPARTAMENTO DE PROGRAMAS DE SAUDE</option>
+  <option value="DEPARTAMENTO GERAL DE DIAGNOSTICO">DEPARTAMENTO GERAL DE DIAGNOSTICO</option>
+  <option value="FARMACIA MUNICIPAL DE RIO DAS OSTRAS">FARMACIA MUNICIPAL DE RIO DAS OSTRAS</option>
+  <option value="HOSPITAL MUNICIPAL DRA NAELMA MONTEIRO DA SILVA">HOSPITAL MUNICIPAL DRA NAELMA MONTEIRO DA SILVA</option>
+  <option value="MEDICINA DO TRABALHO RIO DAS OSTRAS">MEDICINA DO TRABALHO RIO DAS OSTRAS</option>
+  <option value="NASCA NUCLEO DE ATENCAO A SAUDE DA CRIANCA E ADOLESCENTE">NASCA NUCLEO DE ATENCAO A SAUDE DA CRIANCA E ADOLESCENTE</option>
+  <option value="PRONTO SOCORRO MUNICIPAL RIO DAS OSTRAS">PRONTO SOCORRO MUNICIPAL RIO DAS OSTRAS</option>
+  <option value="PROGRAMA DE COMBATE A HANSENIASE E DE CONTROLE A TUBERCULOSE">PROGRAMA DE COMBATE A HANSENIASE E DE CONTROLE A TUBERCULOSE</option>
+  <option value="SECRETARIA MUNICIPAL DE SAUDE DE RIO DAS OSTRAS">SECRETARIA MUNICIPAL DE SAUDE DE RIO DAS OSTRAS</option>
+  <option value="SERVICO DE ASSISTENCIA ESPECIALIZADA EM DST">SERVICO DE ASSISTENCIA ESPECIALIZADA EM DST</option>
+  <option value="SERVICO DE ATENDIMENTO DOMICILIAR">SERVICO DE ATENDIMENTO DOMICILIAR</option>
+  <option value="SERVICO DE CUIDADOS A PESSOAS COM ESTOMAS">SERVICO DE CUIDADOS A PESSOAS COM ESTOMAS</option>
+  <option value="SERVICO DE REFERENCIA A SAUDE DA MULHER">SERVICO DE REFERENCIA A SAUDE DA MULHER</option>
+  <option value="UNIDADE BASICA DE SAUDE BOCA DA BARRA">UNIDADE BASICA DE SAUDE BOCA DA BARRA</option>
+  <option value="UNIDADE BASICA DE SAUDE JARDIM MARILEA">UNIDADE BASICA DE SAUDE JARDIM MARILEA</option>
+  <option value="UNIDADE BASICA DE SAUDE NOVA ESPERANCA">UNIDADE BASICA DE SAUDE NOVA ESPERANCA</option>
+  <option value="UNIDADE SAUDE DA FAMILIA ANCORA">UNIDADE SAUDE DA FAMILIA ANCORA</option>
+  <option value="UNIDADE SAUDE DA FAMILIA CANTAGALO">UNIDADE SAUDE DA FAMILIA CANTAGALO</option>
+  <option value="UNIDADE SAUDE DA FAMILIA CIDADE PRAIANA">UNIDADE SAUDE DA FAMILIA CIDADE PRAIANA</option>
+  <option value="UNIDADE SAUDE DA FAMILIA CLAUDIO RIBEIRO">UNIDADE SAUDE DA FAMILIA CLAUDIO RIBEIRO</option>
+  <option value="UNIDADE SAUDE DA FAMILIA DONA EDIMEIA">UNIDADE SAUDE DA FAMILIA DONA EDIMEIA</option>
+  <option value="UNIDADE SAUDE DA FAMILIA MAR DO NORTE">UNIDADE SAUDE DA FAMILIA MAR DO NORTE</option>
+  <option value="UNIDADE SAUDE DA FAMILIA NOVA CIDADE">UNIDADE SAUDE DA FAMILIA NOVA CIDADE</option>
+  <option value="UNIDADE SAUDE DA FAMILIA OPERARIO">UNIDADE SAUDE DA FAMILIA OPERARIO</option>
+  <option value="UNIDADE SAUDE DA FAMILIA RECANTO">UNIDADE SAUDE DA FAMILIA RECANTO</option>
+  <option value="UNIDADE SAUDE DA FAMILIA ROCHA LEAO">UNIDADE SAUDE DA FAMILIA ROCHA LEAO</option>
+  <option value="UPA 24H VALMIR HESPANHOL">UPA 24H VALMIR HESPANHOL</option>
+</select>
+
+<h2>4. Membros da Família</h2>
+<p>Preenchimento automático com base no número de moradores informado.</p>
+<div id="membrosContainer"></div>
+
+<script>
+  document.querySelector('input[name="numeroMoradores"]').addEventListener('input', function () {
+    const total = parseInt(this.value);
+    const container = document.getElementById('membrosContainer');
+    container.innerHTML = '';
+    if (total && total > 1) {
+      for (let i = 1; i < total; i++) {
+        const membro = document.createElement('fieldset');
+        membro.innerHTML = `
+          <legend>Membro ${i}</legend>
+          
+          <label>Nome completo</label>
+          <input type="text" name="membro_${i}_nome">
+
+          <label>Grau de parentesco</label>
+          <select name="membro_${i}_parentesco">
+            <option value="">Selecione</option>
+            <option value="Cônjuge">Cônjuge</option>
+            <option value="Filho(a)">Filho(a)</option>
+            <option value="Pai/Mãe">Pai/Mãe</option>
+            <option value="Avô/Avó">Avô/Avó</option>
+            <option value="Sogro(a)">Sogro(a)</option>
+            <option value="Enteado(a)">Enteado(a)</option>
+            <option value="Outro">Outro</option>
+          </select>
+
+          <label>CPF *</label>
+          <input type="text" name="membro_${i}_cpf" required>
+
+          <label>CNS</label>
+          <input type="text" name="membro_${i}_cns">
+
+          <label>Data de nascimento</label>
+          <input type="text" name="membro_${i}_dataNascimento">
+
+          <label>Idade (anos)</label>
+          <input type="number" name="membro_${i}_idade" min="0">
+
+          <label>Sexo *</label>
+          <select name="membro_${i}_sexo" required>
+            <option value="">Selecione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
+          </select>
+
+          <label>Estado civil</label>
+          <select name="membro_${i}_estadoCivil">
+            <option value="">Selecione</option>
+            <option value="Solteiro(a)">Solteiro(a)</option>
+            <option value="Casado(a)">Casado(a)</option>
+            <option value="Divorciado(a)">Divorciado(a)</option>
+            <option value="Viúvo(a)">Viúvo(a)</option>
+            <option value="União Estável">União Estável</option>
+          </select>
+
+          <label>Escolaridade</label>
+          <select name="membro_${i}_escolaridade">
+            <option value="">Selecione</option>
+            <option value="Não alfabetizado">Não alfabetizado</option>
+            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+            <option value="Superior Incompleto">Superior Incompleto</option>
+            <option value="Superior Completo">Superior Completo</option>
+            <option value="Pós-graduação">Pós-graduação</option>
+          </select>
+
+          <label>Possui alguma deficiência?</label>
+          <select name="membro_${i}_deficienciaPresente" onchange="this.nextElementSibling.style.display = this.value === 'Sim' ? 'block' : 'none'">
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <div style="display:none">
+            <label>Quais?</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Auditiva"> Auditiva</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Física"> Física</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Intelectual"> Intelectual</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Visual"> Visual</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Mental"> Mental</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Múltipla"> Múltipla</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="TEA"> TEA</label><br>
+              <label><input type="checkbox" name="membro_${i}_deficiencia[]" value="Outra"> Outra</label>
+            </div>
+          </div>
+
+          <label>Possui doenças crônicas?</label>
+          <select name="membro_${i}_doencaCronica" onchange="this.nextElementSibling.style.display = this.value === 'Sim' ? 'block' : 'none'">
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <div style="display:none">
+            <label>Quais?</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Hipertensão"> Hipertensão</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Diabetes"> Diabetes</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Asma"> Asma</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Doença renal crônica"> Doença renal crônica</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Doença cardiovascular"> Doença cardiovascular</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Doença hepática crônica"> Doença hepática crônica</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Doença respiratória crônica"> Doença respiratória crônica</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Câncer"> Câncer</label><br>
+              <label><input type="checkbox" name="membro_${i}_doencas[]" value="Outras"> Outras</label>
+            </div>
+          </div>
+
+          <label>Usa medicamento contínuo?</label>
+          <select name="membro_${i}_usoMedicamento" onchange="this.nextElementSibling.style.display = this.value === 'Sim' ? 'block' : 'none'">
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <div style="display:none">
+            <label>Quais?</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Losartana"> Losartana</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Metformina"> Metformina</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Insulina"> Insulina</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Sinvastatina"> Sinvastatina</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Levotiroxina"> Levotiroxina</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Omeprazol"> Omeprazol</label><br>
+              <label><input type="checkbox" name="membro_${i}_medicamentos[]" value="Outro"> Outro</label>
+            </div>
+          </div>
+
+          <label>Possui plano de saúde privado?</label>
+          <select name="membro_${i}_planoSaude">
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+
+          <label>Está gestante?</label>
+          <select name="membro_${i}_gestante" onchange="this.nextElementSibling.style.display = this.value === 'Sim' ? 'block' : 'none'">
+            <option value="">Selecione</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <div style="display:none">
+            <label>Tempo de gestação (semanas)</label>
+            <input type="number" name="membro_${i}_tempoGestacao" min="1">
+
+            <label>Já possui filhos?</label>
+            <select name="membro_${i}_possuiFilhos">
+              <option value="">Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+
+            <label>Quantos filhos?</label>
+            <input type="number" name="membro_${i}_quantosFilhos" min="0">
+          </div>
+        `;
+        container.appendChild(membro);
+      }
+    }
+  });
+</script>
+
+
+
+<h2>5. Animais na residência</h2>
+
+<div id="animaisContainer">
+  <label>Possui Cães?</label>
+  <select onchange="document.getElementById('infoCachorro').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoCachorro" style="display:none">
+    <label>Quantidade de cães</label>
+    <input type="number" name="qtdCachorro" min="0">
+    <label>Quantos estão castrados?</label>
+    <input type="number" name="castradoCachorro" min="0">
+    <label>Quantos vacinados (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoCachorro" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaCachorro" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioCachorro">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+
+  <label>Possui Gatos?</label>
+  <select onchange="document.getElementById('infoGato').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoGato" style="display:none">
+    <label>Quantidade de gatos</label>
+    <input type="number" name="qtdGato" min="0">
+    <label>Quantos estão castrados?</label>
+    <input type="number" name="castradoGato" min="0">
+    <label>Quantos vacinados (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoGato" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaGato" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioGato">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+
+  <label>Possui Galinhas?</label>
+  <select onchange="document.getElementById('infoGalinha').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoGalinha" style="display:none">
+    <label>Quantidade de galinhas</label>
+    <input type="number" name="qtdGalinha" min="0">
+    <label>Quantas estão castradas?</label>
+    <input type="number" name="castradoGalinha" min="0">
+    <label>Quantas vacinadas (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoGalinha" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaGalinha" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioGalinha">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+
+  <label>Possui Cavalos?</label>
+  <select onchange="document.getElementById('infoCavalo').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoCavalo" style="display:none">
+    <label>Quantidade de cavalos</label>
+    <input type="number" name="qtdCavalo" min="0">
+    <label>Quantos estão castrados?</label>
+    <input type="number" name="castradoCavalo" min="0">
+    <label>Quantos vacinados (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoCavalo" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaCavalo" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioCavalo">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+
+  <label>Possui Aves Ornamentais?</label>
+  <select onchange="document.getElementById('infoAve').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoAve" style="display:none">
+    <label>Quantidade</label>
+    <input type="number" name="qtdAve" min="0">
+    <label>Quantas estão castradas?</label>
+    <input type="number" name="castradoAve" min="0">
+    <label>Quantas vacinadas (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoAve" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaAve" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioAve">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+
+  <label>Possui Outros Animais?</label>
+  <select onchange="document.getElementById('infoOutroAnimal').style.display = this.value === 'Sim' ? 'block' : 'none';">
+    <option value="">Selecione</option>
+    <option value="Sim">Sim</option>
+    <option value="Não">Não</option>
+  </select>
+  <div id="infoOutroAnimal" style="display:none">
+    <label>Espécie</label>
+    <input type="text" name="especieOutroAnimal">
+    <label>Quantidade</label>
+    <input type="number" name="qtdOutroAnimal" min="0">
+    <label>Quantos estão castrados?</label>
+    <input type="number" name="castradoOutroAnimal" min="0">
+    <label>Quantos vacinados (últimos 12 meses)?</label>
+    <input type="number" name="vacinadoOutroAnimal" min="0">
+    <label>Consultas veterinárias (últimos 12 meses)</label>
+    <input type="number" name="consultaOutroAnimal" min="0">
+    <label>Tipo de proprietário</label>
+    <select name="proprietarioOutroAnimal">
+      <option value="">Selecione</option>
+      <option value="Tutor">Tutor</option>
+      <option value="Protetor">Protetor</option>
+    </select>
+  </div>
+</div>
+<button type="submit" id="botaoEnviar">Enviar</button>
+  </form>
+
+  <script type="module" src="scripts.js"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log('Service Worker registrado com sucesso.'))
+      .catch(error => console.error('Erro ao registrar o Service Worker:', error));
+  }
+</script>
+
+</body>
+</html>

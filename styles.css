@@ -1,0 +1,85 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f8fb;
+  color: #333;
+}
+
+h1.titulo-principal {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+.laranja {
+  color: #f57c00;
+}
+
+form {
+  background-color: #ffffff;
+  border: 1px solid #cfd8dc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+  color: #0d47a1;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #b0bec5;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #1976d2;
+  outline: none;
+  box-shadow: 0 0 3px #64b5f6;
+}
+
+.checkbox-group {
+  margin-top: 10px;
+}
+
+fieldset {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  background-color: #e3f2fd;
+}
+
+legend {
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+button[type="submit"] {
+  background-color: #f57c00;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #ef6c00;
+}
